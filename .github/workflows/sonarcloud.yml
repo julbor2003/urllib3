@@ -26,19 +26,6 @@ jobs:
           uv sync --group dev --frozen
           python -m pip install coverage pytest trustme trio quart quart-trio httpx h2 pysocks cryptography pyOpenSSL idna pytest-socket pytest-timeout
           python -m pip install 'anyio[trio]'
-      - name: Diagnostic - print installed packages and versions
-        run: |
-          python -m pip freeze | head -200
-          python -c "
-import importlib
-names = ['hypercorn','quart','quart_trio','trio','anyio','httpx']
-for n in names:
-    try:
-        m = importlib.import_module(n)
-        print(n, getattr(m, '__version__', '(no __version__)'), m.__file__)
-    except Exception as e:
-        print(n, 'MISSING/ERROR:', e)
-          "
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
