@@ -32,7 +32,7 @@ jobs:
         run: |
           python -m pip freeze | sed -n '1,200p'
           python - <<'PY'
-import importlib,sys
+import importlib.sys
 names = ["hypercorn","quart","quart_trio","trio","anyio","httpx"]
 for n in names:
     try:
