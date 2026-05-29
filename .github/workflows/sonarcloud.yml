@@ -28,6 +28,7 @@ jobs:
           python -m pip install pytest
           python -m pip install trustme
           python -m pip install trio
+          python -m pip install quart quart-trio
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
