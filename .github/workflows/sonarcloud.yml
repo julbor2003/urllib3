@@ -27,6 +27,7 @@ jobs:
           python -m pip install coverage
           python -m pip install pytest
           python -m pip install trustme
+          python -m pip install trio
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
