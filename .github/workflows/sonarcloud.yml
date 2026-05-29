@@ -26,7 +26,7 @@ jobs:
           uv sync --group dev --frozen
           python -m pip install coverage pytest trustme trio quart quart-trio httpx h2 pysocks cryptography pyOpenSSL idna pytest-socket pytest-timeout
           python -m pip install 'anyio[trio]'
-      - name: Diagnostic: print installed packages and versions
+      - name: Diagnostic print installed packages and versions
         run: |
           python -m pip freeze | sed -n '1,200p'
           python - <<'PY'
