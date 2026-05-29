@@ -26,6 +26,7 @@ jobs:
           uv sync --group dev --frozen
           python -m pip install coverage
           python -m pip install pytest
+          python -m pip install trustme
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
