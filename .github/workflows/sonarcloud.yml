@@ -26,6 +26,8 @@ jobs:
           uv sync --group dev
           python -m pip install coverage pytest trustme trio quart quart-trio httpx h2 pysocks cryptography pyOpenSSL idna pytest-socket pytest-timeout
           python -m pip install 'anyio[trio]'
+          # Force-install hypercorn from urllib3-changes branch (required for TLS scope extensions)
+          python -m pip install --force-reinstall 'git+https://github.com/urllib3/hypercorn@urllib3-changes'
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
