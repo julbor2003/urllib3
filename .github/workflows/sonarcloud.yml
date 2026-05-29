@@ -24,11 +24,10 @@ jobs:
           pip install -e .
           pip install uv
           uv sync --group dev --frozen
-          python -m pip install coverage
-          python -m pip install pytest
-          python -m pip install trustme
-          python -m pip install trio
-          python -m pip install quart quart-trio
+          # Explicit installs for packages sometimes missing on the runner
+          python -m pip install coverage pytest trustme trio quart quart-trio \
+            httpx hypercorn h2 pysocks cryptography pyOpenSSL "anyio[trio]" idna \
+            pytest-socket pytest-timeout
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
