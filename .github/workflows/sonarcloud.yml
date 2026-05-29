@@ -26,8 +26,21 @@ jobs:
           uv sync --group dev --frozen
           # Explicit installs for packages sometimes missing on the runner
           python -m pip install coverage pytest trustme trio quart quart-trio \
-            httpx hypercorn h2 pysocks cryptography pyOpenSSL "anyio[trio]" idna \
+            httpx h2 pysocks cryptography pyOpenSSL "anyio[trio]" idna \
             pytest-socket pytest-timeout
+      - name: Diagnostic: print installed packages and versions
+        run: |
+          python -m pip freeze | sed -n '1,200p'
+          python - <<'PY'
+import importlib,sys
+names = ["hypercorn","quart","quart_trio","trio","anyio","httpx"]
+for n in names:
+    try:
+        m = importlib.import_module(n)
+        print(n, getattr(m, "__version__", "(no __version__)") , m.__file__)
+    except Exception as e:
+        print(n, "MISSING/ERROR:", e)
+PY
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
