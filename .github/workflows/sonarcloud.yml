@@ -24,6 +24,7 @@ jobs:
           pip install -e .
           pip install uv
           uv sync --group dev --frozen
+          python -m pip install coverage
       - name: Run unit tests and generate coverage report
         run: |
           mkdir -p .coverage-reports
